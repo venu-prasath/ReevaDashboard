@@ -44,7 +44,7 @@ A **Project Management Dashboard** built with **Next.js 15**, designed to stream
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/ReevaDashboard.git
+   git clone git@github.com:venu-prasath/ReevaDashboard.git
    cd ReevaDashboard/reeva-frontend
    ```
 
