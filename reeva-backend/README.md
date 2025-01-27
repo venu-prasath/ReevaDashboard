@@ -104,6 +104,12 @@ POSTGRES_PORT=5432
 
 ---
 
+## Notes on Improvements
+
+1. Role based access control for key components
+2. Better implementation of JOIN queries to effieciently fetch data from database.
+3. CI/CD pipeline set up for easy testing and deployment
+
 ## Development
 
 ### Install Dependencies Locally

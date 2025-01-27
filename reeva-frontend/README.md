@@ -94,6 +94,13 @@ A **Project Management Dashboard** built with **Next.js 15**, designed to stream
 - **Supabase Storage**: For photo uploads.
 - **Tailwind CSS**: For styling and responsive design.
 
+## Notes on Improvements
+
+1. Code splitting and code organization can be improved with time.
+2. Migrating the JWT based authentication.
+3. Role based access control support for enhanced features
+4. Support for Pagination, Search and Filter
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
