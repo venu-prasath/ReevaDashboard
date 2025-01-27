@@ -48,7 +48,7 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
         <br />
         <h1 className="text-xl font-bold">Tasks</h1>
         <div className="flex justify-start items-center w-2/3 space-x-4">
-          <Search placeholder="Search projects..." />
+          <Search placeholder="Search tasks..." />
           <CreateButton
             ctaText="Create Task"
             href={`/projects/${projectId}/tasks/create`}

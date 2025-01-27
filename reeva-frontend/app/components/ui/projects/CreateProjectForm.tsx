@@ -10,6 +10,7 @@ import { Button } from "@/app/components/ui/Button";
 import { onCreateProject } from "@/app/lib/actions";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { cn } from "@/app/lib/utils";
 
 export default async function Form() {
   const { userId } = await auth();
@@ -27,9 +28,9 @@ export default async function Form() {
 
   return (
     <form action={handleSubmit}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-background text-foreground p-4 md:p-6">
         <h1 className="text-2xl font-bold mb-4">Create a new project</h1>
-        <div className="rounded-md bg-gray-50 p-4 md:p-6">
+        <div className="rounded-md bg-background text-foreground p-4 md:p-6">
           {/* Project Title */}
           <div className="mb-4">
             <label htmlFor="title" className="mb-2 block text-sm font-medium">
@@ -42,9 +43,9 @@ export default async function Form() {
                   name="title"
                   type="text"
                   placeholder="Enter project title"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 text-foreground placeholder:text-foreground bg-background"
                 />
-                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -63,9 +64,9 @@ export default async function Form() {
                   name="description"
                   type="text"
                   placeholder="Enter project description"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 text-foreground placeholder:text-foreground bg-background"
                 />
-                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -83,12 +84,12 @@ export default async function Form() {
                 <input
                   id="deadline"
                   name="deadline"
-                  type="datetime-local"
+                  type="date"
                   step="0.01"
                   placeholder="Select a date"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 text-foreground placeholder:text-foreground bg-background"
                 />
-                <CalendarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <CalendarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -98,7 +99,7 @@ export default async function Form() {
             <legend className="mb-2 block text-sm font-medium">
               Set the project status
             </legend>
-            <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+            <div className="rounded-md border border-gray-200 bg-background text-foreground px-[14px] py-3">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <input
@@ -106,7 +107,7 @@ export default async function Form() {
                     name="status"
                     type="radio"
                     value="onhold"
-                    className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                    className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-foreground bg-background focus:ring-2"
                   />
                   <label
                     htmlFor="onhold"

@@ -21,12 +21,12 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="rounded-lg bg-gray-200 p-2 md:pt-0">
           <div className="md:hidden">
             {tasks.map((task) => (
               <div
                 key={task.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full rounded-md bg-background p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
@@ -38,7 +38,7 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                       {task.title}
                       {/* </Link> */}
                     </div>
-                    <p className="text-sm text-gray-500 pr-16 overflow-clip">
+                    <p className="text-sm text-foreground pr-16 overflow-clip">
                       {task.description}
                     </p>
                   </div>
@@ -47,7 +47,7 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                 <div className="flex w-full items-center justify-between pt-4 text-sm">
                   <div>
                     <p>Due Date</p>
-                    <p>{task.dueDate}</p>
+                    <p>{formatDateToLocal(task.due_date)}</p>
                   </div>
                   <div>
                     <p>Assignee</p>
@@ -55,7 +55,7 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                   </div>
                   <div>
                     <p>Project Id</p>
-                    <p>{task.projectId}</p>
+                    <p>{task.project}</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <EditEntity entity="tasks" id={task.id} />
@@ -91,7 +91,7 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-background text-foreground">
               {tasks.map(
                 (task) => (
                   console.log("Task Table", task),
@@ -104,7 +104,7 @@ const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                     >
                       <td className="whitespace-nowrap px-3 py-3">
                         <Link
-                          href={`/tasks/${task.id}/details`}
+                          href={`/projects/${task.project}/tasks/${task.id}/edit`}
                           className="text-blue-500 hover:underline"
                         >
                           {task.title}

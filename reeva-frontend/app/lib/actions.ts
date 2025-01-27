@@ -46,7 +46,7 @@ export async function onCreateProject(formData: FormData) {
     title: formData.get("title"),
     description: formData.get("description"),
     status: formData.get("status"),
-    deadline: formData.get("deadline"),
+    deadline: `${formData.get("deadline")}T00:00`,
   });
 
   const project = {
@@ -67,7 +67,7 @@ export async function editProject(project_id: number, formData: FormData) {
     title: formData.get("title"),
     description: formData.get("description"),
     status: formData.get("status"),
-    deadline: formData.get("deadline"),
+    deadline: `${formData.get("deadline")}T00:00`,
   });
 
   const project = {
@@ -132,7 +132,7 @@ export async function onCreateTask(formData: FormData) {
     title: formData.get("title"),
     description: formData.get("description"),
     status: formData.get("status"),
-    due_date: formData.get("duedate"),
+    due_date: `${formData.get("duedate")}T00:00`,
     priority: formData.get("priority"),
     assignee_id: Number(formData.get("assignee")),
     project_id: Number(formData.get("project_id")),
@@ -235,7 +235,7 @@ export const editTask2 = async (
     title: formData.title,
     description: formData.description,
     status: formData.status,
-    due_date: formData.due_date,
+    due_date: `${formData.due_date}}T00:00`,
     assignee_id: Number(formData.assignee_id),
     priority: formData.priority,
     project_id: Number(formData.project_id),

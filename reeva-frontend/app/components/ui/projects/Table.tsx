@@ -20,12 +20,12 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="rounded-lg bg-gray-100 p-2 md:pt-0">
           <div className="md:hidden">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+                className="mb-2 w-full rounded-md bg-background p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
@@ -37,7 +37,7 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                         {project.title}
                       </Link>
                     </div>
-                    <p className="text-sm text-gray-500 pr-16 overflow-clip">
+                    <p className="text-sm pr-16 overflow-clip">
                       {project.description}
                     </p>
                   </div>
@@ -46,15 +46,15 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                 <div className="flex w-full items-center justify-between pt-4 text-sm">
                   <div>
                     <p>Deadline</p>
-                    <p>{project.deadline}</p>
+                    <p>{formatDateToLocal(project.deadline)}</p>
                   </div>
                   <div>
                     <p>Created At</p>
-                    <p>{project.createdAt}</p>
+                    <p>{formatDateToLocal(project.createdAt)}</p>
                   </div>
                   <div>
                     <p>Modified At</p>
-                    <p>{project.modifiedAt}</p>
+                    <p>{formatDateToLocal(project.modifiedAt)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <EditEntity entity="projects" id={project.id} />
@@ -90,7 +90,7 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-background text-foreground">
               {projects.map((project) => (
                 <tr
                   key={project.id}

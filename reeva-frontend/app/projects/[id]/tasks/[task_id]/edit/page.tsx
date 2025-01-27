@@ -3,6 +3,7 @@ import EditTaskForm from "@/app/components/ui/tasks/EditTaskForm";
 import React from "react";
 import { fetchAllUsers } from "@/app/lib/users/fetchData";
 import { fetchTasksById } from "@/app/lib/tasks/fetchData";
+import NavBar from "@/app/components/ui/NavBar";
 
 type pageProps = {
   params: {
@@ -24,9 +25,12 @@ const page: React.FC<pageProps> = async ({ params }) => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full pt-8">
-      <EditTaskForm users={users} task={task} />
-    </div>
+    <>
+      <NavBar />
+      <div className="flex flex-col justify-center items-center w-full h-full pt-8">
+        <EditTaskForm users={users} task={task} />
+      </div>
+    </>
   );
 };
 export default page;

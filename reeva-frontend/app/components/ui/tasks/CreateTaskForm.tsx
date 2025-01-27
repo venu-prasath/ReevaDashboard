@@ -22,9 +22,9 @@ export default async function Form({ projectId }: FormProps) {
 
   return (
     <form action={onCreateTask}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="rounded-md bg-background p-4 md:p-6">
         <h1 className="text-2xl font-bold mb-4">Create a new Task</h1>
-        <div className="rounded-md bg-gray-50 p-4 md:p-6">
+        <div className="rounded-md bg-background text-foreground p-4 md:p-6">
           <input type="hidden" name="project_id" value={projectId} />
           {/* Project Title */}
           <div className="mb-4">
@@ -38,9 +38,9 @@ export default async function Form({ projectId }: FormProps) {
                   name="title"
                   type="text"
                   placeholder="Enter task title"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-foreground text-foreground bg-background"
                 />
-                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -59,9 +59,9 @@ export default async function Form({ projectId }: FormProps) {
                   name="description"
                   type="text"
                   placeholder="Enter task description"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-foreground text-foreground bg-background"
                 />
-                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -76,12 +76,12 @@ export default async function Form({ projectId }: FormProps) {
                 <input
                   id="duedate"
                   name="duedate"
-                  type="datetime-local"
+                  type="date"
                   step="0.01"
                   placeholder="Select a date"
-                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-foreground text-foreground bg-background"
                 />
-                <CalendarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                <CalendarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground peer-focus:text-foreground" />
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default async function Form({ projectId }: FormProps) {
             <legend className="mb-2 block text-sm font-medium">
               Set the task status
             </legend>
-            <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+            <div className="rounded-md border border-gray-200 bg-background px-[14px] py-3">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <input
@@ -148,7 +148,7 @@ export default async function Form({ projectId }: FormProps) {
             <legend className="mb-2 block text-sm font-medium">
               Set the task priorty
             </legend>
-            <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+            <div className="rounded-md border border-gray-200 bg-background px-[14px] py-3">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <input
@@ -212,7 +212,7 @@ export default async function Form({ projectId }: FormProps) {
               <select
                 id="assignee"
                 name="assignee"
-                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-foreground text-foreground bg-background"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -224,7 +224,7 @@ export default async function Form({ projectId }: FormProps) {
                   </option>
                 ))}
               </select>
-              <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+              <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-foreground" />
             </div>
           </div>
         </div>
