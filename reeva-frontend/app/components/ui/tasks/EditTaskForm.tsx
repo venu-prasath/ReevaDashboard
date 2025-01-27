@@ -37,17 +37,19 @@ export default function EditTaskForm({ users, task }: EditFormProps) {
     task.image_urls
   );
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  async function handleFormSubmission(event) {
+  async function handleFormSubmission() {
     editTask2(formData, uploadedImages);
   }
 
   return (
-    <form action={(e) => handleFormSubmission(e)}>
+    <form action={handleFormSubmission}>
       <div className="rounded-md bg-background p-4 md:p-6">
         <h1 className="text-2xl font-bold mb-4">Edit Task</h1>
         <div className="rounded-md bg-background p-4 md:p-6">

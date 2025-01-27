@@ -28,6 +28,7 @@ export const fetchTotalProjects = async (query: string) => {
   //const response = await fetch(`/api/projects?query=${query}`);
   //const data = await response.json();
   //return data.total;
+  console.log("fetchTotalProjects: ", query);
   return 0;
 };
 

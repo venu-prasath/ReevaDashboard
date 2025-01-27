@@ -11,19 +11,19 @@ type PhotosProps = {
 };
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
 );
 
 const Photos: React.FC<PhotosProps> = ({
   uploadedImages,
   setUploadedImages,
 }) => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [newImage, setNewImage] = useState(false);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setImage(event.target.files[0]);
     }

@@ -4,7 +4,7 @@ import CreateTaskForm from "@/app/components/ui/tasks/CreateTaskForm";
 import NavBar from "@/app/components/ui/NavBar";
 
 type pageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 const page: React.FC<pageProps> = async ({ params }) => {

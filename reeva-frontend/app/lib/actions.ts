@@ -230,7 +230,7 @@ export const editTask2 = async (
     title: formData.title,
     description: formData.description,
     status: formData.status,
-    due_date: `${formData.due_date}}T00:00`,
+    due_date: `${formData.due_date}`,
     assignee_id: Number(formData.assignee_id),
     priority: formData.priority,
     project_id: Number(formData.project_id),

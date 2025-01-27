@@ -5,6 +5,7 @@ export const fetchTotalTasks = async (query: string) => {
   //const response = await fetch(`/api/projects?query=${query}`);
   //const data = await response.json();
   //return data.total;
+  console.log("fetchTotalTasks: ", query);
   return 0;
 };
 

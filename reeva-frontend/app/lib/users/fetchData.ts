@@ -1,6 +1,10 @@
 import { errors, user } from "@/app/lib/definitions";
 
-export const registerUser = async (data: user) => {
+export const registerUser = async (data: {
+  name: string;
+  email: string;
+  clerk_id: string;
+}) => {
   try {
     const response = await fetch("http://localhost:8000/users/create", {
       method: "POST",

@@ -3,9 +3,7 @@ import React from "react";
 import CreateProjectForm from "@/app/components/ui/projects/CreateProjectForm";
 import NavBar from "@/app/components/ui/NavBar";
 
-type pageProps = {};
-
-const page: React.FC<pageProps> = () => {
+const page: React.FC = () => {
   return (
     <>
       <NavBar />

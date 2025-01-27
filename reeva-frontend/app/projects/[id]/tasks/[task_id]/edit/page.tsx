@@ -6,10 +6,10 @@ import { fetchTasksById } from "@/app/lib/tasks/fetchData";
 import NavBar from "@/app/components/ui/NavBar";
 
 type pageProps = {
-  params: {
+  params: Promise<{
     id: string;
     task_id: string;
-  };
+  }>;
 };
 
 const page: React.FC<pageProps> = async ({ params }) => {

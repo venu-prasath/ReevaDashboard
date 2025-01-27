@@ -10,7 +10,6 @@ import { Button } from "@/app/components/ui/Button";
 import { onCreateProject } from "@/app/lib/actions";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { cn } from "@/app/lib/utils";
 
 export default async function Form() {
   const { userId } = await auth();

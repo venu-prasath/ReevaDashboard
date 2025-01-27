@@ -4,7 +4,7 @@ import NavBar from "@/app/components/ui/NavBar";
 import Pagination from "@/app/components/ui/Pagination";
 import Search from "@/app/components/ui/Search";
 import TasksTable from "@/app/components/ui/tasks/Table";
-import { auth, clerkClient } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { fetchTotalTasks } from "@/app/lib/fetchData";
 
@@ -15,7 +15,7 @@ export const metadata = {
 
 type TaskDashboardProps = {
   searchParams?: Promise<{ query?: string; page?: string }>;
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function TaskDashboard(props: TaskDashboardProps) {
@@ -25,19 +25,19 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
   }
   const params = await props.params;
   const projectId = await params.id;
-  const client = await clerkClient();
-  const user = await client?.users.getUser(userId);
+  //const client = await clerkClient();
+  //const user = await client?.users.getUser(userId);
 
-  const userData = {
-    name: user.username || user.firstName || "Anonymous",
-    email: user.primaryEmailAddress?.emailAddress || "",
-    clerk_id: user.id,
-  };
+  // const userData = {
+  //   name: user.username || user.firstName || "Anonymous",
+  //   email: user.primaryEmailAddress?.emailAddress || "",
+  //   clerk_id: user.id,
+  // };
   // await registerUser(userData);
 
   const searchParams = await props.searchParams;
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  // const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchTotalTasks("", query);
   return (
     <div>
@@ -55,7 +55,7 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
           />
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <TasksTable projectId={projectId} />
+          <TasksTable projectId={projectId} query="" currentPage={1} />
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

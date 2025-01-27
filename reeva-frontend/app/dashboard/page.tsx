@@ -36,7 +36,7 @@ export default async function Dashboard(props: DashboardProps) {
 
   const searchParams = await props.searchParams;
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  //const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchTotalProjects(query);
   return (
     <div>
@@ -51,7 +51,7 @@ export default async function Dashboard(props: DashboardProps) {
           <CreateButton ctaText="Create Project" href="/projects/create" />
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <ProjectTable />
+          <ProjectTable query="" currentPage={1} />
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />
