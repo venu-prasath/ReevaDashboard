@@ -14,7 +14,7 @@ import { redirect } from "next/navigation";
 export default async function Form() {
   const { userId } = await auth();
   if (!userId) {
-    redirect("/dashboard");
+    redirect("/projects");
   }
   const client = await clerkClient();
   const { id } = await client?.users.getUser(userId);
@@ -152,7 +152,7 @@ export default async function Form() {
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/dashboard"
+          href="/projects"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel

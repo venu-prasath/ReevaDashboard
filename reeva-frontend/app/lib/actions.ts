@@ -53,7 +53,7 @@ export async function onCreateProject(formData: FormData) {
 
   await createProject(project);
   revalidatePath("/dashboard");
-  redirect("/dashboard");
+  redirect("/projects");
 }
 
 export async function editProject(project_id: number, formData: FormData) {
@@ -75,13 +75,13 @@ export async function editProject(project_id: number, formData: FormData) {
 
   await updateProject(id, project);
   revalidatePath("/dashboard");
-  redirect("/dashboard");
+  redirect("/projects");
 }
 
 export async function deleteProjectById(id: number) {
   const { project_id } = DeleteProject.parse({ project_id: id });
   await deleteProject(project_id);
-  revalidatePath("/dashboard");
+  revalidatePath("/projects");
 }
 
 const TaskSchema = z.object({
@@ -149,51 +149,6 @@ export async function onCreateTask(formData: FormData) {
   redirect(`/projects/${project_id}/tasks`);
 }
 
-export async function editTask(formData: FormData, uploadedImages: string[]) {
-  const {
-    id,
-    title,
-    description,
-    status,
-    due_date,
-    priority,
-    assignee_id,
-    project_id,
-    image_urls,
-  } = EditTask.parse({
-    id: Number(formData.get("id")),
-    title: formData.get("title"),
-    description: formData.get("description"),
-    status: formData.get("status"),
-    due_date: formData.get("duedate"),
-    assignee_id: Number(formData.get("assignee")),
-    priority: formData.get("priority"),
-    project_id: Number(formData.get("project_id")),
-    image_urls: uploadedImages,
-  });
-
-  const task = {
-    id,
-    title,
-    description,
-    status,
-    due_date,
-    priority,
-    assignee_id,
-    project_id,
-    image_urls,
-  } as tasks;
-
-  console.log("Edit Task: ", task);
-  // await Promise.allSettled([
-  //   updateTask(id, task),
-  //   //updateImages(id, uploadedImages),
-  // ]);
-  //await updateTask(id, task);
-  //revalidatePath(`/projects/${project_id}/tasks`);
-  //redirect(`/projects/${project_id}/tasks`);
-}
-
 export async function deleteTaskById(id: number) {
   const { task_id } = DeleteTask.parse({ task_id: id });
   await deleteTask(task_id);
@@ -211,7 +166,7 @@ type editTaskFormData = {
   project_id: number;
 };
 
-export const editTask2 = async (
+export const editTask = async (
   formData: editTaskFormData,
   uploadedImages: string[]
 ) => {
@@ -249,7 +204,6 @@ export const editTask2 = async (
     image_urls,
   } as tasks;
 
-  console.log("Edit Task: ", task);
   await updateTask(id, task);
   revalidatePath(`/projects/${project_id}/tasks`);
   redirect(`/projects/${project_id}/tasks`);

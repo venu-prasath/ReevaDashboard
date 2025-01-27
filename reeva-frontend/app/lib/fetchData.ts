@@ -7,11 +7,3 @@ export const deleteEntityWithId = async (entity: string, id: number) => {
     await deleteTaskById(id);
   }
 };
-
-export const fetchTotalTasks = async (projectId: string, query: string) => {
-  //const response = await fetch(`/api/projects/${projectId}/tasks?query=${query}`);
-  //const data = await response.json();
-  //return data.total;
-  console.log("fetchTotalTasks: ", projectId, query);
-  return 0;
-};

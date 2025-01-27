@@ -97,53 +97,48 @@ const TasksTable: React.FC<TableProps> = async ({
               </tr>
             </thead>
             <tbody className="bg-background text-foreground">
-              {tasks.map(
-                (task) => (
-                  console.log("Task Table", task),
-                  (
-                    <tr
-                      key={task.id}
-                      className="w-full border-b py-3 text-sm last-of-type:border-none 
+              {tasks.map((task) => (
+                <tr
+                  key={task.id}
+                  className="w-full border-b py-3 text-sm last-of-type:border-none 
                   [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg 
                   [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                >
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <Link
+                      href={`/projects/${task.project}/tasks/${task.id}/edit`}
+                      className="text-blue-500 hover:underline"
                     >
-                      <td className="whitespace-nowrap px-3 py-3">
-                        <Link
-                          href={`/projects/${task.project}/tasks/${task.id}/edit`}
-                          className="text-blue-500 hover:underline"
-                        >
-                          {task.title}
-                        </Link>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3 max-w-20 overflow-hidden">
-                        {task.description}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3">
-                        <Status status={task.status} />
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3">
-                        {formatDateToLocal(task.due_date)}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3">
-                        <Priority priority={task.priority} />
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3">
-                        {task.assignee}
-                      </td>
-                      <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                        <div className="flex justify-end gap-3">
-                          <EditEntity
-                            entity="tasks"
-                            id={task.id}
-                            project_id={task.project}
-                          />
-                          <DeleteEntity entity="tasks" id={task.id} />
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                )
-              )}
+                      {task.title}
+                    </Link>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3 max-w-20 overflow-hidden">
+                    {task.description}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <Status status={task.status} />
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {formatDateToLocal(task.due_date)}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <Priority priority={task.priority} />
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {task.assignee}
+                  </td>
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex justify-end gap-3">
+                      <EditEntity
+                        entity="tasks"
+                        id={task.id}
+                        project_id={task.project}
+                      />
+                      <DeleteEntity entity="tasks" id={task.id} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

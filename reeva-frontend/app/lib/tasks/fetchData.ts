@@ -1,12 +1,24 @@
 import { tasks } from "@/app/lib/definitions";
 import { cookies } from "next/headers";
 
-export const fetchTotalTasks = async (query: string) => {
-  //const response = await fetch(`/api/projects?query=${query}`);
-  //const data = await response.json();
-  //return data.total;
-  console.log("fetchTotalTasks: ", query);
-  return 0;
+export const fetchAllTasks = async () => {
+  try {
+    const cookieStore = await cookies();
+    const myCookie = cookieStore.get("clerk_id");
+    if (!myCookie) {
+      return { error: "No clerk_id cookie found" };
+    }
+    const response = await fetch(`http://localhost:8000/tasks/all`, {
+      headers: {
+        "x-clerk-id": myCookie.value.toString(),
+      },
+    });
+    const data = await JSON.parse(await response.text());
+    return data;
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    return { error: error };
+  }
 };
 
 export const fetchTasks = async (
@@ -57,7 +69,6 @@ export const fetchTasksById = async (id: string) => {
       return {} as tasks;
     }
     const data = await JSON.parse(await response.text());
-    console.log("FetchTaskById: ", data);
     return data as tasks;
   } catch (error) {
     console.error("Error fetching tasks:", error);
@@ -80,8 +91,6 @@ export const createTask = async (data: tasks) => {
       },
       body: JSON.stringify(data),
     });
-    console.log(JSON.stringify(data));
-    console.log(response);
     const responseData = await JSON.parse(await response.text());
     return responseData;
   } catch (error) {
@@ -105,7 +114,6 @@ export const updateTask = async (id: number, task: tasks) => {
       },
       body: JSON.stringify(task),
     });
-    console.log("TaskToUpdate: ", task);
     if (!response.ok) {
       console.error("Error updating the task:", response);
       return {} as tasks;
@@ -138,7 +146,6 @@ export const updateImages = async (id: number, images: string[]) => {
       },
       body: JSON.stringify(body),
     });
-    console.log("TaskToUpdate: ", body);
     if (!response.ok) {
       console.error("Error updating the task:", response);
       return {} as tasks;

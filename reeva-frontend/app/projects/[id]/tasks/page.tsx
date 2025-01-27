@@ -6,7 +6,6 @@ import Search from "@/app/components/ui/Search";
 import TasksTable from "@/app/components/ui/tasks/Table";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { fetchTotalTasks } from "@/app/lib/fetchData";
 
 export const metadata = {
   title: "Projects | Tasks",
@@ -25,20 +24,7 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
   }
   const params = await props.params;
   const projectId = await params.id;
-  //const client = await clerkClient();
-  //const user = await client?.users.getUser(userId);
 
-  // const userData = {
-  //   name: user.username || user.firstName || "Anonymous",
-  //   email: user.primaryEmailAddress?.emailAddress || "",
-  //   clerk_id: user.id,
-  // };
-  // await registerUser(userData);
-
-  const searchParams = await props.searchParams;
-  const query = searchParams?.query || "";
-  // const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchTotalTasks("", query);
   return (
     <div>
       <NavBar />
@@ -58,7 +44,7 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
           <TasksTable projectId={projectId} query="" currentPage={1} />
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
-          <Pagination totalPages={totalPages} />
+          <Pagination totalPages={0} />
         </div>
       </div>
     </div>

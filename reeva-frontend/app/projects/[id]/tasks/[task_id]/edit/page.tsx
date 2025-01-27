@@ -13,8 +13,7 @@ type pageProps = {
 };
 
 const page: React.FC<pageProps> = async ({ params }) => {
-  const { id, task_id } = await params;
-  console.log("Edit Task Page", id, task_id);
+  const { task_id } = await params;
   const [task, users] = await Promise.all([
     fetchTasksById(task_id),
     fetchAllUsers(),

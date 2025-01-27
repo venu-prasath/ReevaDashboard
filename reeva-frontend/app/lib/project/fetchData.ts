@@ -24,12 +24,28 @@ export const createProject = async (data: projects) => {
   }
 };
 
-export const fetchTotalProjects = async (query: string) => {
-  //const response = await fetch(`/api/projects?query=${query}`);
-  //const data = await response.json();
-  //return data.total;
-  console.log("fetchTotalProjects: ", query);
-  return 0;
+export const fetchAllProjects = async () => {
+  try {
+    const cookieStore = await cookies();
+    const myCookie = cookieStore.get("clerk_id");
+    if (!myCookie) {
+      return { error: "No clerk_id cookie found" };
+    }
+    const response = await fetch(`http://localhost:8000/projects/all`, {
+      headers: {
+        "x-clerk-id": myCookie.value.toString(),
+      },
+    });
+    if (!response.ok) {
+      //console.error("Error fetching projects:", response);
+      return [] as projects[];
+    }
+    const data = await JSON.parse(await response.text());
+    return data as projects[];
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return [] as projects[];
+  }
 };
 
 export const fetchProjects = async (

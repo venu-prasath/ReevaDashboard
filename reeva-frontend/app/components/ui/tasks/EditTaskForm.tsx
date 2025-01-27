@@ -15,7 +15,7 @@ import { Button } from "@/app/components/ui/Button";
 import { tasks, user } from "@/app/lib/definitions";
 import { convertToDatetimeLocal } from "@/app/lib/utils";
 import Photos from "./Photos";
-import { editTask2 } from "@/app/lib/actions";
+import { editTask } from "@/app/lib/actions";
 
 type EditFormProps = {
   users: user[];
@@ -45,7 +45,7 @@ export default function EditTaskForm({ users, task }: EditFormProps) {
   };
 
   async function handleFormSubmission() {
-    editTask2(formData, uploadedImages);
+    editTask(formData, uploadedImages);
   }
 
   return (
