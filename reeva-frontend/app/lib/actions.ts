@@ -9,7 +9,12 @@ import {
   updateProject,
 } from "./project/fetchData";
 import { projects, tasks } from "./definitions";
-import { createTask, deleteTask, updateTask } from "./tasks/fetchData";
+import {
+  createTask,
+  deleteTask,
+  updateImages,
+  updateTask,
+} from "./tasks/fetchData";
 
 const ProjectSchema = z.object({
   id: z.number(),
@@ -93,6 +98,7 @@ const TaskSchema = z.object({
   priority: z.enum(["low", "medium", "high"]),
   assignee_id: z.number(),
   due_date: z.string(),
+  image_urls: z.array(z.string()),
   createdAt: z.string(),
   modifiedAt: z.string(),
 });
@@ -121,6 +127,7 @@ export async function onCreateTask(formData: FormData) {
     priority,
     assignee_id,
     project_id,
+    image_urls,
   } = CreateTask.parse({
     title: formData.get("title"),
     description: formData.get("description"),
@@ -129,6 +136,7 @@ export async function onCreateTask(formData: FormData) {
     priority: formData.get("priority"),
     assignee_id: Number(formData.get("assignee")),
     project_id: Number(formData.get("project_id")),
+    image_urls: [],
   });
 
   const task = {
@@ -139,13 +147,14 @@ export async function onCreateTask(formData: FormData) {
     priority,
     assignee_id,
     project_id,
+    image_urls,
   } as tasks;
   await createTask(task);
   revalidatePath(`/projects/${project_id}/tasks`);
   redirect(`/projects/${project_id}/tasks`);
 }
 
-export async function editTask(formData: FormData) {
+export async function editTask(formData: FormData, uploadedImages: string[]) {
   const {
     id,
     title,
@@ -155,6 +164,7 @@ export async function editTask(formData: FormData) {
     priority,
     assignee_id,
     project_id,
+    image_urls,
   } = EditTask.parse({
     id: Number(formData.get("id")),
     title: formData.get("title"),
@@ -164,6 +174,7 @@ export async function editTask(formData: FormData) {
     assignee_id: Number(formData.get("assignee")),
     priority: formData.get("priority"),
     project_id: Number(formData.get("project_id")),
+    image_urls: uploadedImages,
   });
 
   const task = {
@@ -175,11 +186,17 @@ export async function editTask(formData: FormData) {
     priority,
     assignee_id,
     project_id,
+    image_urls,
   } as tasks;
 
-  await updateTask(id, task);
-  revalidatePath(`/projects/${project_id}/tasks`);
-  redirect(`/projects/${project_id}/tasks`);
+  console.log("Edit Task: ", task);
+  // await Promise.allSettled([
+  //   updateTask(id, task),
+  //   //updateImages(id, uploadedImages),
+  // ]);
+  //await updateTask(id, task);
+  //revalidatePath(`/projects/${project_id}/tasks`);
+  //redirect(`/projects/${project_id}/tasks`);
 }
 
 export async function deleteTaskById(id: number) {
@@ -187,3 +204,58 @@ export async function deleteTaskById(id: number) {
   await deleteTask(task_id);
   revalidatePath(`/`);
 }
+
+type editTaskFormData = {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  due_date: string;
+  priority: string;
+  assignee_id: number;
+  project_id: number;
+};
+
+export const editTask2 = async (
+  formData: editTaskFormData,
+  uploadedImages: string[]
+) => {
+  const {
+    id,
+    title,
+    description,
+    status,
+    due_date,
+    priority,
+    assignee_id,
+    project_id,
+    image_urls,
+  } = EditTask.parse({
+    id: Number(formData.id),
+    title: formData.title,
+    description: formData.description,
+    status: formData.status,
+    due_date: formData.due_date,
+    assignee_id: Number(formData.assignee_id),
+    priority: formData.priority,
+    project_id: Number(formData.project_id),
+    image_urls: uploadedImages,
+  });
+
+  const task = {
+    id,
+    title,
+    description,
+    status,
+    due_date,
+    priority,
+    assignee_id,
+    project_id,
+    image_urls,
+  } as tasks;
+
+  console.log("Edit Task: ", task);
+  await updateTask(id, task);
+  revalidatePath(`/projects/${project_id}/tasks`);
+  redirect(`/projects/${project_id}/tasks`);
+};

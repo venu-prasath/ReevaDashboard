@@ -21,6 +21,7 @@ class Tasks(models.Model):
     project = models.ForeignKey(Projects, on_delete=models.CASCADE, related_name='tasks')
     assignee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     due_date = models.DateTimeField()
+    image_urls = models.JSONField(default=list, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

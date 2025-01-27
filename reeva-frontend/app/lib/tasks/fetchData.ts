@@ -116,6 +116,39 @@ export const updateTask = async (id: number, task: tasks) => {
   }
 };
 
+export const updateImages = async (id: number, images: string[]) => {
+  try {
+    const cookieStore = await cookies();
+    const myCookie = cookieStore.get("clerk_id");
+    if (!myCookie) {
+      return { error: "No clerk_id cookie found" };
+    }
+
+    const body = {
+      images: images,
+    };
+
+    const response = await fetch(`http://localhost:8000/tasks/${id}/images`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-clerk-id": myCookie.value.toString(),
+      },
+      body: JSON.stringify(body),
+    });
+    console.log("TaskToUpdate: ", body);
+    if (!response.ok) {
+      console.error("Error updating the task:", response);
+      return {} as tasks;
+    }
+    const responseData = await JSON.parse(await response.text());
+    return responseData;
+  } catch (error) {
+    console.error("Error updating task:", error);
+    return {} as tasks;
+  }
+};
+
 export const deleteTask = async (id: number) => {
   try {
     const cookieStore = await cookies();

@@ -26,6 +26,7 @@ export type tasks = {
   due_date: string;
   assignee: number;
   project: number;
+  image_urls: string[];
 };
 
 export type photos = {

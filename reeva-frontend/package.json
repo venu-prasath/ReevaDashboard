@@ -11,6 +11,8 @@
   "dependencies": {
     "@clerk/nextjs": "^6.10.1",
     "@heroicons/react": "^2.2.0",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.48.1",
     "clsx": "^2.1.1",
     "cookie": "^1.0.2",
     "next": "15.1.6",

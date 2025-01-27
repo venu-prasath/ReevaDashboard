@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import {
   CheckIcon,
@@ -9,18 +12,42 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/components/ui/Button";
-import { editTask } from "@/app/lib/actions";
 import { tasks, user } from "@/app/lib/definitions";
 import { convertToDatetimeLocal } from "@/app/lib/utils";
+import Photos from "./Photos";
+import { editTask2 } from "@/app/lib/actions";
 
 type EditFormProps = {
   users: user[];
   task: tasks;
 };
 
-export default async function EditTaskForm({ users, task }: EditFormProps) {
+export default function EditTaskForm({ users, task }: EditFormProps) {
+  const [formData, setFormData] = useState({
+    id: task.id,
+    title: task.title,
+    description: task.description,
+    due_date: task.due_date,
+    status: task.status,
+    priority: task.priority,
+    project_id: task.project,
+    assignee_id: task.assignee,
+  });
+  const [uploadedImages, setUploadedImages] = useState<string[]>(
+    task.image_urls
+  );
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  async function handleFormSubmission(event) {
+    editTask2(formData, uploadedImages);
+  }
+
   return (
-    <form action={editTask}>
+    <form action={(e) => handleFormSubmission(e)}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <h1 className="text-2xl font-bold mb-4">Edit Task</h1>
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -35,6 +62,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                   id="title"
                   name="title"
                   type="text"
+                  onChange={handleChange}
                   defaultValue={task.title}
                   placeholder="Enter task title"
                   className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -57,6 +85,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                   id="description"
                   name="description"
                   type="textarea"
+                  onChange={handleChange}
                   defaultValue={task.description}
                   placeholder="Enter task description"
                   className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -78,6 +107,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                   name="duedate"
                   type="datetime-local"
                   step="0.01"
+                  onChange={handleChange}
                   defaultValue={convertToDatetimeLocal(task.due_date)}
                   placeholder="Select a date"
                   className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -100,6 +130,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     name="status"
                     type="radio"
                     value="todo"
+                    onChange={handleChange}
                     defaultChecked={task.status === "todo"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                   />
@@ -115,6 +146,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     id="inprogress"
                     name="status"
                     type="radio"
+                    onChange={handleChange}
                     value="inprogress"
                     defaultChecked={task.status === "inprogress"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
@@ -132,6 +164,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     name="status"
                     type="radio"
                     value="done"
+                    onChange={handleChange}
                     defaultChecked={task.status === "done"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                   />
@@ -158,6 +191,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     name="priority"
                     type="radio"
                     value="low"
+                    onChange={handleChange}
                     defaultChecked={task.priority === "low"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                   />
@@ -174,6 +208,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     name="priority"
                     type="radio"
                     value="medium"
+                    onChange={handleChange}
                     defaultChecked={task.priority === "medium"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                   />
@@ -190,6 +225,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
                     name="priority"
                     type="radio"
                     value="high"
+                    onChange={handleChange}
                     defaultChecked={task.priority === "high"}
                     className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                   />
@@ -216,6 +252,7 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
               <select
                 id="assignee"
                 name="assignee"
+                onChange={handleChange}
                 className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 defaultValue={
                   users !== undefined
@@ -236,6 +273,13 @@ export default async function EditTaskForm({ users, task }: EditFormProps) {
             </div>
             <input type="hidden" name="id" value={task.id} />
             <input type="hidden" name="project_id" value={task.project} />
+          </div>
+
+          <div className="my-4">
+            <Photos
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+            />
           </div>
         </div>
       </div>
