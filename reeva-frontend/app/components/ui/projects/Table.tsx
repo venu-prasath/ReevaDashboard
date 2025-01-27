@@ -50,11 +50,11 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                   </div>
                   <div>
                     <p>Created At</p>
-                    <p>{formatDateToLocal(project.createdAt)}</p>
+                    <p>{formatDateToLocal(project.created_at)}</p>
                   </div>
                   <div>
                     <p>Modified At</p>
-                    <p>{formatDateToLocal(project.modifiedAt)}</p>
+                    <p>{formatDateToLocal(project.modified_at)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
                     <EditEntity entity="projects" id={project.id} />
@@ -116,10 +116,10 @@ const ProjectTable: React.FC<TableProps> = async ({ query, currentPage }) => {
                     {formatDateToLocal(project.deadline)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(project.createdAt)}
+                    {formatDateToLocal(project.created_at)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(project.modifiedAt)}
+                    {formatDateToLocal(project.modified_at)}
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

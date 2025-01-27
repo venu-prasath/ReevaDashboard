@@ -33,7 +33,7 @@ def get_tasks_by_user(request):
             status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.get(clerk_id=clerk_id)
-        tasks = user.tasks.all()
+        tasks = Tasks.objects.filter(assignee=user)
         serializer = TasksSerializer(tasks, many=True)
         return Response(serializer.data)
     except Exception as e:

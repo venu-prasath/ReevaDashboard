@@ -10,10 +10,15 @@ import Priority from "./Priority";
 type TableProps = {
   query: string;
   currentPage: number;
+  projectId: string;
 };
 
-const TasksTable: React.FC<TableProps> = async ({ query, currentPage }) => {
-  const tasks = await fetchTasks(query, currentPage);
+const TasksTable: React.FC<TableProps> = async ({
+  query,
+  currentPage,
+  projectId,
+}) => {
+  const tasks = await fetchTasks(query, currentPage, projectId);
 
   if ("error" in tasks) {
     return <div>Error: {tasks.error}</div>;

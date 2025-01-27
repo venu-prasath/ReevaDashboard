@@ -55,7 +55,7 @@ export default async function TaskDashboard(props: TaskDashboardProps) {
           />
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <TasksTable />
+          <TasksTable projectId={projectId} />
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={totalPages} />

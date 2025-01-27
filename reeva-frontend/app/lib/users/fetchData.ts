@@ -1,5 +1,4 @@
-import { errors, projects, tasks, user } from "@/app/lib/definitions";
-import { cookies, headers } from "next/headers";
+import { errors, user } from "@/app/lib/definitions";
 
 export const registerUser = async (data: user) => {
   try {

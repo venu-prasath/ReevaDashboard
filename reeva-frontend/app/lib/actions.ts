@@ -9,12 +9,7 @@ import {
   updateProject,
 } from "./project/fetchData";
 import { projects, tasks } from "./definitions";
-import {
-  createTask,
-  deleteTask,
-  updateImages,
-  updateTask,
-} from "./tasks/fetchData";
+import { createTask, deleteTask, updateTask } from "./tasks/fetchData";
 
 const ProjectSchema = z.object({
   id: z.number(),

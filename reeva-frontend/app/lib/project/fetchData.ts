@@ -1,5 +1,5 @@
-import { projects, tasks, user } from "@/app/lib/definitions";
-import { cookies, headers } from "next/headers";
+import { projects } from "@/app/lib/definitions";
+import { cookies } from "next/headers";
 
 export const createProject = async (data: projects) => {
   try {

@@ -11,8 +11,8 @@ export type projects = {
   description: string;
   status: "active" | "onhold" | "completed";
   deadline: string;
-  createdAt: string;
-  modifiedAt: string;
+  created_at: string;
+  modified_at: string;
 };
 
 export type tasks = {

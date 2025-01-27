@@ -10,7 +10,8 @@ export const fetchTotalTasks = async (query: string) => {
 
 export const fetchTasks = async (
   query: string = "",
-  currentPage: number = 1
+  currentPage: number = 1,
+  projectId: string
 ) => {
   try {
     const cookieStore = await cookies();
@@ -19,7 +20,7 @@ export const fetchTasks = async (
       return { error: "No clerk_id cookie found" };
     }
     const response = await fetch(
-      `http://localhost:8000/tasks?query=${query}&page=${currentPage}`,
+      `http://localhost:8000/tasks/project/${projectId}?query=${query}&page=${currentPage}`,
       {
         headers: {
           "x-clerk-id": myCookie.value.toString(),

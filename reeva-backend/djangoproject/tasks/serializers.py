@@ -19,6 +19,13 @@ class TasksSerializer(serializers.ModelSerializer):
     #         raise serializers.ValidationError('User with this assignee_id does not exist.')
     #     return user
 
+    def validate_clerk_id(self, value):
+        try:
+            user = User.objects.get(clerk_id=value)
+        except User.DoesNotExist:
+            raise serializers.ValidationError('User with this clerk_id does not exist.')
+        return user
+
     def validate_project_id(self, value):
         try:
             project = Projects.objects.get(id=value)
